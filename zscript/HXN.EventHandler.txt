@@ -1,0 +1,29 @@
+class HexeninatorHandler : EventHandler 
+{
+	Array<Actor> Entities;
+	
+	override void PlayerEntered (PlayerEvent e)
+	{
+		PlayerInfo player = players [e.PlayerNumber];
+	}
+   
+	override void WorldTick()
+	{
+		// tick tack tick tack?
+	}
+	
+	override void WorldThingDied(WorldEvent e)
+	{	
+		// Open any doors with special tags if specified actor died
+	}
+	
+	override void WorldLoaded(WorldEvent e)
+	{
+		Entities.Clear();
+		
+		for (int i = 0; i < 100; i++)
+		{
+			//do stuff
+		}
+	}
+}
