@@ -1,5 +1,0 @@
-addKeySection "ZDoom Allies" "ZDASettings"
-addMenuKey "Summon any" "ToggleSummon"
-
-Alias "ToggleSummon" "netevent \"TrySummon\""
-DefaultBind "G" "ToggleSummon"

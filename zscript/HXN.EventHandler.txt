@@ -19,11 +19,64 @@ class HexeninatorHandler : EventHandler
 	
 	override void WorldLoaded(WorldEvent e)
 	{
-		Entities.Clear();
-		
-		for (int i = 0; i < 100; i++)
-		{
-			//do stuff
-		}
+
+	}
+	
+	override void CheckReplacement (ReplaceEvent e)
+	{
+			if (GetDefaultByType(e.Replacee).bIsMonster)
+			{
+				let FoundThing = e.Replacee;
+				
+				//Note: this can't be customized, need to iterate through these later on
+				
+				if (FoundThing is "Zombieman")
+					e.Replacement = "Ettin";
+				if (FoundThing is "Shotgunguy")
+					e.Replacement = "Ettin";
+				if (FoundThing is "Chaingunguy")
+					e.Replacement = "Centaur";
+				if (FoundThing is "Demon")
+					e.Replacement = "CentaurLeader";
+				if (FoundThing is "Doomimp")
+					e.Replacement = "Demon1";
+				if (FoundThing is "Spectre")
+					e.Replacement = "CentaurLeader";
+				if (FoundThing is "Cacodemon")
+					e.Replacement = "Bishop";
+				if (FoundThing is "LostSoul")
+					e.Replacement = "Bishop";
+				if (FoundThing is "PainElemental")
+					e.Replacement = "Bishop";
+				if (FoundThing is "Arachnotron")
+					e.Replacement = "FireDemon";
+				if (FoundThing is "Revenant")
+					e.Replacement = "IceGuy";
+				if (FoundThing is "Archvile")
+					e.Replacement = "Wraith";
+					
+				if (FoundThing is "CyberDemon" || FoundThing is "SpiderMasterMind")
+				{
+					int rdm = random(0,3);
+					int Korax = random(0,500);
+					bool KoraxSpawned;
+					
+					if (Korax > 350)
+					{
+						e.Replacement = "Korax";
+						KoraxSpawned = true;
+					}
+					else
+					{
+						if (rdm == 0 && !KoraxSpawned)
+							e.Replacement = "ClericBoss";
+						if (rdm == 1 && !KoraxSpawned)
+							e.Replacement = "FighterBoss";
+						if (rdm == 2 && !KoraxSpawned)
+							e.Replacement = "MageBoss";
+					}
+				}
+				
+			}
 	}
 }

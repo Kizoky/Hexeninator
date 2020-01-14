@@ -1,4 +1,6 @@
+include "mapinfo/doomitems.txt"
+
 gameinfo
 {
-	AddEventHandlers = "ZDoomAllyHandler"
+	AddEventHandlers = "HexeninatorHandler"
 }
