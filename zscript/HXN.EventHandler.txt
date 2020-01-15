@@ -54,6 +54,8 @@ class HexeninatorHandler : EventHandler
 					e.Replacement = "IceGuy";
 				if (FoundThing is "Archvile")
 					e.Replacement = "Wraith";
+				if (FoundThing is "Fatso")
+					e.Replacement = "Demon2";
 					
 				if (FoundThing is "CyberDemon" || FoundThing is "SpiderMasterMind")
 				{
