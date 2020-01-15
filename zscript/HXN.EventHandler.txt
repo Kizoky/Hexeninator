@@ -37,6 +37,10 @@ class HexeninatorHandler : EventHandler
 	{
 		let SpawnedThing = e.Thing;
 		
+		// Destroy any Unknown entities
+		if (SpawnedThing is "Unknown") SpawnedThing.Destroy();
+		
+		
 		if (SpawnedThing is "PlayerPawn")
 		{
 			//SpawnedThing.Radius = 16;
