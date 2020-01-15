@@ -1,3 +1,13 @@
+// let's cheat...
+
+class Ettin_Zombieman : Ettin { }
+class Ettin_Shotgunguy : Ettin { }
+class Bishop_Cacodemon : Bishop { }
+class Bishop_PainElemental : Bishop { }
+class Bishop_LostSoul : Bishop { }
+class Centaur_Demon : Centaur { }
+class Centaur_Spectre : Centaur { Default { RenderStyle "OptFuzzy"; } }
+
 class HexeninatorHandler : EventHandler 
 {
 	Array<Actor> Entities;
@@ -5,6 +15,7 @@ class HexeninatorHandler : EventHandler
 	override void PlayerEntered (PlayerEvent e)
 	{
 		PlayerInfo player = players [e.PlayerNumber];
+		
 	}
    
 	override void WorldTick()
@@ -22,6 +33,81 @@ class HexeninatorHandler : EventHandler
 
 	}
 	
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let SpawnedThing = e.Thing;
+		
+		if (SpawnedThing is "PlayerPawn")
+		{
+			//SpawnedThing.Radius = 16;
+			SpawnedThing.Height = 56;
+			SpawnedThing.Mass = 100;
+		}
+		
+		if (SpawnedThing is "Ettin_Zombieman" || SpawnedThing is "Ettin_Shotgunguy")
+		{
+			SpawnedThing.Scale = (0.80,0.80);
+			SpawnedThing.Height = 56;
+			SpawnedThing.Speed = 8;
+			SpawnedThing.Mass = 100;
+		}
+		
+		if (SpawnedThing is "Demon1" && !(SpawnedThing is "Demon2")) // Doomimp
+		{
+			SpawnedThing.Scale = (0.60,0.60);
+			SpawnedThing.Height = 56;
+			SpawnedThing.Speed = 8;
+		}
+		
+		if (SpawnedThing is "Centaur_Demon" || SpawnedThing is "Centaur_Spectre")
+		{
+			SpawnedThing.Scale = (0.80,0.80);
+			SpawnedThing.Speed = 10;
+			SpawnedThing.Height = 56;
+			SpawnedThing.Mass = 400;
+			
+			if (SpawnedThing is "Centaur_Spectre")
+			{
+				SpawnedThing.Alpha = 0.5;
+				SpawnedThing.bSHADOW = true;
+			}
+		}
+		
+		if (SpawnedThing is "CentaurLeader")
+		{
+			SpawnedThing.Scale = (0.80,0.80);
+			SpawnedThing.Speed = 8;
+			SpawnedThing.Height = 56;
+			SpawnedThing.bMISSILEMORE = true;
+			SpawnedThing.bMISSILEEVENMORE = true;
+		}
+		
+		if (SpawnedThing is "Bishop_Cacodemon" || SpawnedThing is "Bishop_PainElemental")
+		{
+			SpawnedThing.Scale = (1.05,1.05);
+			SpawnedThing.Height = 56;
+			SpawnedThing.Speed = 8;
+			SpawnedThing.bFLOAT = true;
+			SpawnedThing.bNOGRAVITY = true;
+			//SpawnedThing.bMISSILEMORE = true;
+		}
+		
+		if (SpawnedThing is "Bishop_LostSoul")
+		{
+			SpawnedThing.Scale = (0.50,0.60);
+			SpawnedThing.Health = 100;
+			SpawnedThing.Height = 56;
+			SpawnedThing.bMISSILEMORE = true;
+			//SpawnedThing.Damage = (SpawnedThing.Default.Damage / 2);
+			SpawnedThing.bFLOAT = true;
+			SpawnedThing.bNOGRAVITY = true;
+			SpawnedThing.bMISSILEMORE = true;
+			SpawnedThing.bDONTFALL = true;
+			SpawnedThing.bNOICEDEATH = true;
+		}
+	
+	}
+	
 	override void CheckReplacement (ReplaceEvent e)
 	{
 			if (GetDefaultByType(e.Replacee).bIsMonster)
@@ -31,23 +117,23 @@ class HexeninatorHandler : EventHandler
 				//Note: this can't be customized, need to iterate through these later on
 				
 				if (FoundThing is "Zombieman")
-					e.Replacement = "Ettin";
+					e.Replacement = "Ettin_Zombieman";
 				if (FoundThing is "Shotgunguy")
-					e.Replacement = "Ettin";
+					e.Replacement = "Ettin_Shotgunguy";
 				if (FoundThing is "Chaingunguy")
-					e.Replacement = "Centaur";
-				if (FoundThing is "Demon")
 					e.Replacement = "CentaurLeader";
+				if (FoundThing is "Demon")
+					e.Replacement = "Centaur_Demon";
 				if (FoundThing is "Doomimp")
 					e.Replacement = "Demon1";
 				if (FoundThing is "Spectre")
-					e.Replacement = "CentaurLeader";
+					e.Replacement = "Centaur_Spectre";
 				if (FoundThing is "Cacodemon")
-					e.Replacement = "Bishop";
+					e.Replacement = "Bishop_Cacodemon";
 				if (FoundThing is "LostSoul")
-					e.Replacement = "Bishop";
+					e.Replacement = "Bishop_LostSoul";
 				if (FoundThing is "PainElemental")
-					e.Replacement = "Bishop";
+					e.Replacement = "Bishop_PainElemental";
 				if (FoundThing is "Arachnotron")
 					e.Replacement = "FireDemon";
 				if (FoundThing is "Revenant")
